@@ -7,26 +7,56 @@
 
 import SwiftUI
 
-struct NewTrain: View {
+struct NewTrainView: View {
     @EnvironmentObject var dataManager: DataManager
-    @State private var newDog = ""
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var origin = ""
+    @State private var originDateTime = ""
+    @State private var destination = ""
+    @State private var destinationDateTime = ""
+    @State private var trainEngineNumbers = ""
+    @State private var heldAway = ""
+    @State private var totalPay = ""
     
     var body: some View {
         VStack {
-            TextField("Dog", text: $newDog)
+            TextField("Origin", text: $origin)
+            TextField("Origin Date and Time", text: $originDateTime)
+            TextField("Destination", text: $destination)
+            TextField("Destination Date and Time", text: $destinationDateTime)
+            TextField("Train Engine Numbers", text: $trainEngineNumbers)
+            TextField("Held Away", text: $heldAway)
+            TextField("Total Pay", text: $totalPay)
             
-            Button {
-                dataManager.addDog(dogBreed: newDog)
-            } label: {
+            Button(action: {
+                dataManager.addTrain(
+                    origin: origin,
+                    originDateTime: originDateTime,
+                    destination: destination,
+                    destinationDateTime: destinationDateTime,
+                    trainEngineNumbers: trainEngineNumbers,
+                    heldAway: heldAway,
+                    totalPay: totalPay
+                ) { success in
+                    if success {
+                        presentationMode.wrappedValue.dismiss()
+                    } else {
+                        // Handle the error, e.g., show an alert
+                    }
+                }
+            }) {
                 Text("Save")
             }
+
+
         }
         .padding()
     }
 }
 
-struct NewDogView_Previews: PreviewProvider {
+struct NewTrainView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTrain()
+        NewTrainView()
     }
 }

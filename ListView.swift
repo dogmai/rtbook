@@ -13,17 +13,23 @@ struct ListView: View {
     
     var body: some View {
         NavigationView {
-            List(dataManager.dogs, id: \.id) { dog in
-                Text(dog.breed)
+            List(dataManager.trainJobs, id: \.id) { train in
+                VStack(alignment: .leading) {
+                    Text("Origin: \(train.origin)")
+                    Text("Destination: \(train.destination)")
+                    Text("Engine Numbers: \(train.trainEngineNumbers)")
+                    Text("Total Pay: \(train.totalPay)")
+                }
             }
-            .navigationTitle("Dogs")
+            .navigationTitle("Daily Train")
             .navigationBarItems(trailing: Button(action: {
                 showPopup.toggle()
             }, label: {
                 Image(systemName: "plus")
             }))
             .sheet(isPresented: $showPopup) {
-                NewTrain()
+                NewTrainView()
+                    .environmentObject(dataManager)
             }
         }
     }

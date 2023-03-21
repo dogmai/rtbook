@@ -1,5 +1,5 @@
 //
-//  Dog.swift
+//  Train.swift
 //  RailroadTimeBook
 //
 //  Created by Matthew Hayward on 12/28/22.
@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-struct Dog: Identifiable {
+struct TrainJobs: Identifiable {
     var id: String
-    var breed: String
+    var origin: String
+    var originDateTime: String
+    var destination: String
+    var destinationDateTime: String
+    var trainEngineNumbers: String
+    var heldAway: String
+    var totalPay: String
 }
